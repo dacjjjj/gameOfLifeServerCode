@@ -16,11 +16,32 @@ func main() {
 	// List of worker node addresses (replace with IPs or DNS of your EC2 instances)
 	pAddr := flag.String("port", "8030", "Port to listen on")
 	flag.Parse()
-	rpc.Register(&GolMasterRunner{})
-	listener, _ := net.Listen("tcp", ":"+*pAddr)
-	defer listener.Close()
-	rpc.Accept(listener)
+	golMaster := new(GolMasterRunner)
+	err := rpc.Register(golMaster)
+	if err != nil {
+		log.Fatalf("Error registering GolMasterRunner: %v", err)
+	}
 
+	// Start the listener
+	listener, err := net.Listen("tcp", ":"+*pAddr)
+	if err != nil {
+		log.Fatalf("Error starting listener: %v", err)
+	}
+	defer listener.Close()
+
+	log.Printf("Server is listening on port %s...\n", *pAddr)
+
+	// Accept incoming connections and handle RPC requests
+	for {
+		conn, err := listener.Accept()
+		if err != nil {
+			log.Printf("Error accepting connection: %v", err)
+			continue // Skip the current connection and continue to listen for new ones
+		}
+
+		// Serve the connection using RPC
+		go rpc.ServeConn(conn)
+	}
 }
 
 func (g *GolMasterRunner) MasterStart(initReq stubs.InitialRequest, finalRes *stubs.FinalResponse) (err error) {
