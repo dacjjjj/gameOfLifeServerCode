@@ -133,6 +133,7 @@ func callWorker(workerAddr string, req stubs.Request) stubs.Response {
 
 	// Call the worker's processGameOfLife method (this is the remote procedure call)
 	err := client.Call(stubs.StartWorker, req, res)
+	log.Printf("connected: %v\n", workerAddr)
 	if err != nil {
 		log.Printf("Error calling worker's processGameOfLife: %v\n", err)
 		return stubs.Response{} // Return an empty response on error
