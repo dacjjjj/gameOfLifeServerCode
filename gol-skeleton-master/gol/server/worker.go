@@ -37,7 +37,7 @@ func main() {
 	address := "0.0.0.0:8080"
 	rpc.Register(&GameOfLifeOperations{})
 	// Start listening on the specified address and port
-	listener, _ := net.Listen("tcp", ":"+address)
+	listener, _ := net.Listen("tcp", address)
 	defer listener.Close()
 	rpc.Accept(listener)
 }
