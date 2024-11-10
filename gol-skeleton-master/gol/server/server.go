@@ -80,7 +80,9 @@ func (g *GolMasterRunner) MasterStart(initReq stubs.InitialRequest, finalRes *st
 
 		// Call the worker's processGameOfLife method remotely concurrently
 		go func(workerAddr string, req stubs.Request, index int) {
-			defer wg.Done() // Decrement the counter when the goroutine finishes
+			defer wg.Done()
+			log.Printf("Error connecting to worker: %v\n", workerAddr)
+			// Decrement the counter when the goroutine finishes
 			res := callWorker(workerAddr, req)
 			// Send the response to the channel for aggregation
 			responseChannel <- res
