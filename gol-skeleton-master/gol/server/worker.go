@@ -10,7 +10,7 @@ import (
 
 type GameOfLifeOperations struct{}
 
-func (G *GameOfLifeOperations) processGameOfLife(req stubs.Request, res *stubs.Response) (err error) {
+func (g *GameOfLifeOperations) ProcessGameOfLife(req stubs.Request, res *stubs.Response) (err error) {
 	if req.NextWorld == nil {
 		err = errors.New("no final board recieved")
 		return
@@ -35,7 +35,7 @@ func (G *GameOfLifeOperations) processGameOfLife(req stubs.Request, res *stubs.R
 func main() {
 	// Define the address and port the server will listen on
 	address := "0.0.0.0:8080"
-	rpc.Register(GameOfLifeOperations{})
+	rpc.Register(&GameOfLifeOperations{})
 	// Start listening on the specified address and port
 	listener, _ := net.Listen("tcp", ":"+address)
 	defer listener.Close()

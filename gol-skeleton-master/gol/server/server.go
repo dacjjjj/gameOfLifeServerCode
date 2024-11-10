@@ -10,20 +10,20 @@ import (
 	"uk.ac.bris.cs/gameoflife/util"
 )
 
-type golMasterRunner struct{}
+type GolMasterRunner struct{}
 
 func main() {
 	// List of worker node addresses (replace with IPs or DNS of your EC2 instances)
 	pAddr := flag.String("port", "8030", "Port to listen on")
 	flag.Parse()
-	rpc.Register(&golMasterRunner{})
+	rpc.Register(&GolMasterRunner{})
 	listener, _ := net.Listen("tcp", ":"+*pAddr)
 	defer listener.Close()
 	rpc.Accept(listener)
 
 }
 
-func (g *golMasterRunner) masterStart(initReq stubs.InitialRequest, finalRes *stubs.FinalResponse) (err error) {
+func (g *GolMasterRunner) masterStart(initReq stubs.InitialRequest, finalRes *stubs.FinalResponse) (err error) {
 
 	workerNodes := []string{
 		"ip-172-31-86-15.ec2.internal.us-east-1b.compute.internal:8080", // Replace with worker IP/DNS
@@ -111,7 +111,7 @@ func callWorker(workerAddr string, req stubs.Request) stubs.Response {
 	var res stubs.Response
 
 	// Call the worker's processGameOfLife method (this is the remote procedure call)
-	err = client.Call("GameOfLifeOperations.processGameOfLife", &req, &res)
+	err = client.Call("GameOfLifeOperations.ProcessGameOfLife", &req, &res)
 	if err != nil {
 		log.Printf("Error calling worker's processGameOfLife: %v\n", err)
 		return stubs.Response{} // Return an empty response on error
