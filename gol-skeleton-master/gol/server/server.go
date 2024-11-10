@@ -53,7 +53,7 @@ type WorkerResponse struct {
 
 func (g *GolMasterRunner) MasterStart(initReq stubs.InitialRequest, finalRes *stubs.FinalResponse) (err error) {
 	workerNodes := []string{
-		"ip-172-31-86-15.ec2.internal:8040",
+		"ec2-52-204-0-223.compute-1.amazonaws.com:8040",
 	}
 
 	var wg sync.WaitGroup
