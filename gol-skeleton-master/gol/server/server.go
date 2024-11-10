@@ -40,6 +40,7 @@ func main() {
 		}
 
 		// Serve the connection using RPC
+		log.Printf("Connected! connection: %v", conn)
 		go rpc.ServeConn(conn)
 	}
 }
