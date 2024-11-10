@@ -143,7 +143,7 @@ func callWorker(workerAddr string, req stubs.Request) WorkerResponse {
 
 	// Map stubs.Response to WorkerResponse
 
-	log.Printf("connected: %v\n", workerAddr, res.TurnsCompleted, res.WorkerNumber)
+	log.Printf("connected: %v\n", workerAddr, res.TurnsCompleted, res.WorkerNumber, "de ", req.Turns, req.WorkerNumber)
 	return WorkerResponse{
 		FinalWorld:     res.FinalWorld,
 		WorkerNumber:   res.WorkerNumber,
