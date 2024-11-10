@@ -2,7 +2,6 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"net"
 	"net/rpc"
@@ -112,7 +111,6 @@ func (g *GolMasterRunner) MasterStart(initReq stubs.InitialRequest, finalRes *st
 			if i < len(responseChannels) {
 
 				receivedWorld := <-responseChannels[i]
-				fmt.Printf("length of received world: %s", len(receivedWorld))
 				// Calculate the vertical range this worker's piece should fill in newWorld
 				for y := i * sizeOfWorld / passedThreads; y < (i+1)*sizeOfWorld/passedThreads; y++ {
 					for x := 0; x < sizeOfWorld; x++ {
