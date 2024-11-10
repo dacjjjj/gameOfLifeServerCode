@@ -48,7 +48,7 @@ func main() {
 func (g *GolMasterRunner) MasterStart(initReq stubs.InitialRequest, finalRes *stubs.FinalResponse) (err error) {
 
 	workerNodes := []string{
-		"ip-172-31-86-15.ec2.internal:8040",
+		"ip-172-31-87-196.ec2.internal.us-east-1b.compute.internal:8040",
 		//"ip-172-31-87-196.ec2.internal.us-east-1b.compute.internal:8080",
 		//"ip-172-31-88-186.ec2.internal.us-east-1b.compute.internal:8080",
 		//"ip-172-31-82-182.ec2.internal.us-east-1b.compute.internal:8080",
