@@ -66,7 +66,7 @@ func (g *GolMasterRunner) MasterStart(initReq stubs.InitialRequest, finalRes *st
 	var wg sync.WaitGroup
 	passedWorld := initReq.NextWorld
 	passedTurns := initReq.Turns
-	passedThreads := 4
+	passedThreads := len(workerNodes)
 	sizeOfWorld := len(passedWorld)
 	responseChannels := make([]chan [][]uint8, passedThreads)
 	for i := 0; i < passedThreads; i++ {
