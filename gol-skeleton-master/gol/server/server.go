@@ -58,7 +58,7 @@ type WorkerResponse struct {
 func (g *GolMasterRunner) MasterStart(initReq stubs.InitialRequest, finalRes *stubs.FinalResponse) (err error) {
 	workerNodes := []string{
 		//"ec2-52-204-0-223.compute-1.amazonaws.com:8040",
-		"ec2-52-205-110-39.compute-1.amazonaws.com:8040",
+		//"ec2-52-205-110-39.compute-1.amazonaws.com:8040",
 		"ec2-34-198-86-17.compute-1.amazonaws.com:8040",
 		"ec2-34-199-220-125.compute-1.amazonaws.com:8040",
 	}
